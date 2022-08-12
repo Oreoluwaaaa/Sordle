@@ -5,6 +5,23 @@ h1 {
 #table{
     margin: auto;
     border: 3px solid black;
+    border-bottom: 5px solid black;
     width: 490px;
     height: 490px;
+}
+
+.row{
+    background-color: grey;
+    border: 0.01px solid black;
+    width: 99.8%;
+    height: 13.9%;
+    display: flex; 
+}
+
+.column{
+    background-color: grey;
+    border: 1px solid black;
+    width: 70px;
+    height: 100%;
+
 }
