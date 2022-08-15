@@ -50,7 +50,8 @@ async function getRandomWord(){
     .then(response => response.text())
     .then(data => {
         data = data.split("\r\n");
-        word =  data[0];
+        let random = Math.floor(Math.random() * data.length);
+        word = data[random];
     });
     return word.toLowerCase();
 }
@@ -65,9 +66,12 @@ $(document).ready(async function() {
             $(element).append(`<div class='cell' id=${i}></div>`);
         }    
     });
+
     let answer = await getRandomWord();
+    console.log(answer)
     let input = ""; 
     let row = 0;
+    
     $(document).keyup(function(event) {
         keypressed = event.originalEvent.key;
         if (!/[^a-z$]/.test(keypressed) && row < 7){
@@ -84,6 +88,9 @@ $(document).ready(async function() {
                     checkInput(input, answer, row);
                     row++;
                     input =  "";    
+                }
+                else{
+                    alert("invalid word");
                 }
             })
         }
