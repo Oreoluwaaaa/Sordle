@@ -22,15 +22,22 @@ async function inDictionary(word){
 
 function checkInput(input, answer, row){
     correctInput = 0;
+    answer2 = answer.split("");
     for(let j = 0; j < 7; j++){
         if(input[j] === answer[j]){
             $(`div.row#${row} > div#${j}.cell`).css("background", "green").css("transition", "all 5.0s ease");
+            answer2[j] = "-";
             correctInput++;
         }
-        else if(answer.includes(input[j])){
+    }
+    for(let j = 0; j < 7; j++){    
+        if(answer2.includes(input[j])){
             $(`div.row#${row} > div#${j}.cell`).css("background", "orange").css("transition", "all 5.0s ease");
+            answer2[answer2.indexOf(input[j])] = "-";
         }
-        else{
+    }
+    for(let j = 0; j < 7; j++){
+        if(!(answer2.includes(input[j])) && !(input[j] === answer[j])){
             $(`div.row#${row} > div#${j}.cell`).css("background", "black").css("transition", "all 5.0s ease");
         }
     }
@@ -39,15 +46,13 @@ function checkInput(input, answer, row){
 
 async function getRandomWord(){
     let word = "";
-    try {
-        await $.get(`https://random-word-api.herokuapp.com/word?length=7`, function(data) {
-            word = data[0];
-        });
-    }
-    catch(error){
-        console.log("error in fetching word");
-    }
-    return word;
+    await fetch('./words.txt')
+    .then(response => response.text())
+    .then(data => {
+        data = data.split("\r\n");
+        word =  data[0];
+    });
+    return word.toLowerCase();
 }
 
 $(document).ready(async function() {
@@ -65,10 +70,8 @@ $(document).ready(async function() {
     let row = 0;
     $(document).keyup(function(event) {
         keypressed = event.originalEvent.key;
-        console.log(keypressed)
         if (!/[^a-z$]/.test(keypressed) && row < 7){
             input += (input.length < 7) ? event.originalEvent.key : "";
-            console.log(input);
             insert(row, input);
         }
         else if (keypressed == "Backspace"){
