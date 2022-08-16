@@ -114,7 +114,7 @@ $(document).ready(async function() {
     });
 
     // For Mobile Devices
-    const Keyboard = window.SimpleKeyboard.default;
+    const Keyboard = window.SimpleKeyboard.default;    
     const myKeyboard = new Keyboard({
         onKeyPress: keypressed => playGame(keypressed)
     });
