@@ -53,10 +53,9 @@ async function getRandomWord(){
     await fetch('./words.txt')
     .then(response => response.text())
     .then(data => {
-        data = data.split("\r\n");
+        data = data.split(", ");
         let random = Math.floor(Math.random() * data.length);
         word = data[random];
-        console.log(word)
     });
     return word.toLowerCase();
 }
