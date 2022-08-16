@@ -57,6 +57,7 @@ async function getRandomWord(){
         let random = Math.floor(Math.random() * data.length);
         word = data[random];
     });
+    console.log(data)
     return word.toLowerCase();
 }
 
