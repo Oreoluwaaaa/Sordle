@@ -22,22 +22,26 @@ async function inDictionary(word){
 
 function checkInput(input, answer, row){
     correctInput = 0;
-    answer2 = answer.split("");
+    answer = answer.split("");
+    let changedIndices = new Set();
+
     for(let j = 0; j < 7; j++){
         if(input[j] === answer[j]){
             $(`div.row#${row} > div#${j}.cell`).css("background", "green").css("transition", "all 5.0s ease");
-            answer2[j] = "-";
+            answer[j] = "-";
+            changedIndices.add(j);
             correctInput++;
         }
     }
     for(let j = 0; j < 7; j++){    
-        if(answer2.includes(input[j])){
+        if(answer.includes(input[j]) && !(changedIndices.has(j))){
             $(`div.row#${row} > div#${j}.cell`).css("background", "orange").css("transition", "all 5.0s ease");
-            answer2[answer2.indexOf(input[j])] = "-";
+            changedIndices.add(j);
+            answer[answer.indexOf(input[j])] = "-";
         }
     }
     for(let j = 0; j < 7; j++){
-        if(!(answer2.includes(input[j])) && !(input[j] === answer[j])){
+        if(!(changedIndices.has(j))){
             $(`div.row#${row} > div#${j}.cell`).css("background", "black").css("transition", "all 5.0s ease");
         }
     }
@@ -72,7 +76,7 @@ $(document).ready(async function() {
     let input = ""; 
     let row = 0;
     
-    $(document).keyup(function(event) {
+    $(document).keyup(async function(event) {
         keypressed = event.originalEvent.key;
         if (!/[^a-z$]/.test(keypressed) && row < 7){
             input += (input.length < 7) ? event.originalEvent.key : "";
@@ -83,16 +87,21 @@ $(document).ready(async function() {
             insert(row, input);
         }
         else if ((keypressed == "Enter") && (input.length === 7)){
-            inDictionary(input).then(result => {
-                if(result){
-                    checkInput(input, answer, row);
-                    row++;
-                    input =  "";    
+            if (await inDictionary(input)){
+                if (checkInput(input, answer, row)){
+                    alert("Congratulations! Reload for new challenge.");
+                    row = 8
                 }
                 else{
-                    alert("invalid word");
+                    row++;
+                    input =  "";
                 }
-            })
+            }
+            else{
+                setTimeout(() => {
+                    alert("invalid word");
+                }, "3000")
+            }
         }
     });
 });
