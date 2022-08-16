@@ -72,21 +72,19 @@ $(document).ready(async function() {
     });
 
     let answer = await getRandomWord();
-    console.log(answer)
-    let input = ""; 
+    let input = "";
     let row = 0;
     
-    $(document).keyup(async function(event) {
-        keypressed = event.originalEvent.key;
+    async function playGame(keypressed) {
         if (!/[^a-z$]/.test(keypressed) && row < 7){
-            input += (input.length < 7) ? event.originalEvent.key : "";
+            input += (input.length < 7) ? keypressed : "";
             insert(row, input);
         }
-        else if (keypressed == "Backspace"){
+        else if (keypressed == "Backspace" || keypressed == "{bksp}"){
             input = input.substring(0, input.length-1);
             insert(row, input);
         }
-        else if ((keypressed == "Enter") && (input.length === 7)){
+        else if ((keypressed == "Enter" || keypressed == "{enter}") && (input.length === 7)){
             if (await inDictionary(input)){
                 if (checkInput(input, answer, row)){
                     setTimeout(() => {
@@ -108,5 +106,16 @@ $(document).ready(async function() {
                 alert("invalid word");
             }
         }
+    };
+
+    $(document).keyup(async event => {
+        keypressed = event.originalEvent.key;
+        await playGame(keypressed);
+    });
+
+    // For Mobile Devices
+    const Keyboard = window.SimpleKeyboard.default;
+    const myKeyboard = new Keyboard({
+        onKeyPress: keypressed => playGame(keypressed)
     });
 });
