@@ -89,18 +89,23 @@ $(document).ready(async function() {
         else if ((keypressed == "Enter") && (input.length === 7)){
             if (await inDictionary(input)){
                 if (checkInput(input, answer, row)){
-                    alert("Congratulations! Reload for new challenge.");
+                    setTimeout(() => {
+                        alert("Congratulations! Reload for new challenge.");
+                    }, "1750")
                     row = 8
                 }
                 else{
                     row++;
                     input =  "";
+                    if (row === 7){
+                        setTimeout(() => {
+                            alert(`You're out of tries. The word ${answer}`);
+                        }, "1750")
+                    }
                 }
             }
             else{
-                setTimeout(() => {
-                    alert("invalid word");
-                }, "3000")
+                alert("invalid word");
             }
         }
     });
