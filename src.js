@@ -97,7 +97,7 @@ $(document).ready(async function() {
                     input =  "";
                     if (row === 7){
                         setTimeout(() => {
-                            alert(`You're out of tries. The word ${answer}`);
+                            alert(`You're out of tries. The word is ${answer.toUpperCase()}\nReload for new challenge.`);
                         }, "1750")
                     }
                 }
