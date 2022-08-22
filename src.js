@@ -114,8 +114,16 @@ $(document).ready(async function() {
     });
 
     // For Mobile Devices
-    const Keyboard = window.SimpleKeyboard.default;    
-    const myKeyboard = new Keyboard({
-        onKeyPress: keypressed => playGame(keypressed)
-    });
+    let row1 = "QWERTYUIOP";
+    let row2 = "ASDFGHJKL";
+    let row3 = "ZXCVBNM";
+    let keybordRows = [row1.split(""), row2.split(""), row3.split("")];
+    for(i = 0; i < keybordRows.length; i++){
+        $(".simpleKeyboard").append(`<div class='keyboardRow' id=${i}></div>`);
+    }
+    for(i = 0; i < keybordRows.length; i++){
+        for(j = 0; j < keybordRows[i].length; j++){
+            $(`#${i}.keyboardRow`).append(`<button class='keyboardButton' id=${j}>${keybordRows[i][j]}</button>`);
+        }
+    }
 });
