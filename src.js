@@ -115,15 +115,17 @@ $(document).ready(async function() {
 
     // For Mobile Devices
     let row1 = "QWERTYUIOP";
-    let row2 = "ASDFGHJKL";
-    let row3 = "ZXCVBNM";
+    let row2 = " ASDFGHJKL ";
+    let row3 = " ZXCVBNM ";
     let keybordRows = [row1.split(""), row2.split(""), row3.split("")];
     for(i = 0; i < keybordRows.length; i++){
-        $(".simpleKeyboard").append(`<div class='keyboardRow' id=${i}></div>`);
+        $(".simpleKeyboard").append(`<div class='keyboardRow' id=kb${i}></div>`);
     }
     for(i = 0; i < keybordRows.length; i++){
         for(j = 0; j < keybordRows[i].length; j++){
-            $(`#${i}.keyboardRow`).append(`<button class='keyboardButton' id=${j}>${keybordRows[i][j]}</button>`);
+            $(`#kb${i}.keyboardRow`).append(`<button class='keyboardButton' id=kb${i}${j}>${keybordRows[i][j]}</button>`);
         }
     }
+    $("#kb20").text("Enter");
+    $("#kb28").text("Bskp")
 });

@@ -9,7 +9,43 @@ body, html {
 #table{
     margin: auto;
     width: 80%;
-    height: 46%;
+    height: 49%;
+}
+
+#space{
+    width: 49px;
+    height: 50px;
+}
+
+.simpleKeyboard{
+    margin: auto;
+    width: 291px;
+    height: 95px;
+}
+
+.keyboardButton{
+    height: 29px;
+    width: 29px;
+    
+}
+
+#kb2{
+    height: 38px;
+    width: 291px;
+    
+}
+
+#kb10, #kb110{
+    height: 29px;
+    width: 14px;
+    border-width: 0px;
+    background-color: white;
+}
+
+#kb20, #kb28{
+    height: 29px;
+    width: 43.5px;
+    
 }
 
 .row{
@@ -64,5 +100,8 @@ body, html {
         color: white;
     
     }
+
     
-  }
+    
+    
+}
