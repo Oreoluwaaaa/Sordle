@@ -28,6 +28,9 @@ function checkInput(input, answer, row){
     for(let j = 0; j < 7; j++){
         if(input[j] === answer[j]){
             $(`div.row#${row} > div#${j}.cell`).css("background", "green").css("transition", "all 5.0s ease");
+
+            $(`.${input[j].toUpperCase()}`).css("background", "green").css("transition", "all 5.0s ease");
+
             answer[j] = "-";
             changedIndices.add(j);
             correctInput++;
@@ -36,6 +39,13 @@ function checkInput(input, answer, row){
     for(let j = 0; j < 7; j++){    
         if(answer.includes(input[j]) && !(changedIndices.has(j))){
             $(`div.row#${row} > div#${j}.cell`).css("background", "orange").css("transition", "all 5.0s ease");
+
+            let button = $(`.${input[j].toUpperCase()}`);
+
+            if(button.css("background") !== "green"){
+                button.css("background", "orange").css("transition", "all 5.0s ease");
+            }
+
             changedIndices.add(j);
             answer[answer.indexOf(input[j])] = "-";
         }
@@ -43,6 +53,12 @@ function checkInput(input, answer, row){
     for(let j = 0; j < 7; j++){
         if(!(changedIndices.has(j))){
             $(`div.row#${row} > div#${j}.cell`).css("background", "black").css("transition", "all 5.0s ease");
+
+            let button = $(`.${input[j].toUpperCase()}`);
+
+            if(button.css("background") !== "green" && button.css("background") !== "orange" ){   
+                button.css("background", "black").css("transition", "all 5.0s ease");
+            }
         }
     }
     return correctInput === 7 ? true: false;
@@ -76,15 +92,15 @@ $(document).ready(async function() {
     let row = 0;
     
     async function playGame(keypressed) {
-        if (!/[^a-z$]/.test(keypressed) && row < 7){
+        if (!/[^a-z$]/.test(keypressed) && row < 7 && keypressed.length === 1){
             input += (input.length < 7) ? keypressed : "";
             insert(row, input);
         }
-        else if (keypressed == "Backspace" || keypressed == "{bksp}"){
+        else if (keypressed == "Backspace" || keypressed == "{bksp}" || keypressed == "bksp"){
             input = input.substring(0, input.length-1);
             insert(row, input);
         }
-        else if ((keypressed == "Enter" || keypressed == "{enter}") && (input.length === 7)){
+        else if ((keypressed == "Enter" || keypressed == "enter"|| keypressed == "{enter}") && (input.length === 7)){
             if (await inDictionary(input)){
                 if (checkInput(input, answer, row)){
                     setTimeout(() => {
@@ -113,19 +129,25 @@ $(document).ready(async function() {
         await playGame(keypressed);
     });
 
-    // For Mobile Devices
+    //keyboard
     let row1 = "QWERTYUIOP";
-    let row2 = " ASDFGHJKL ";
+    let row2 = "ASDFGHJKL";
     let row3 = " ZXCVBNM ";
+
     let keybordRows = [row1.split(""), row2.split(""), row3.split("")];
     for(i = 0; i < keybordRows.length; i++){
         $(".simpleKeyboard").append(`<div class='keyboardRow' id=kb${i}></div>`);
     }
+
     for(i = 0; i < keybordRows.length; i++){
         for(j = 0; j < keybordRows[i].length; j++){
-            $(`#kb${i}.keyboardRow`).append(`<button class='keyboardButton' id=kb${i}${j}>${keybordRows[i][j]}</button>`);
+            $(`#kb${i}.keyboardRow`).append(`<button class='keyboardButton ${keybordRows[i][j]}' id="kb${i}${j}">${keybordRows[i][j]}</button>`);
         }
     }
     $("#kb20").text("Enter");
-    $("#kb28").text("Bskp")
+    $("#kb28").text("Bksp"); 
+    
+    $(".keyboardButton").click(async function() {
+        await playGame($(this).html().toLowerCase());
+    });
 });

@@ -26,26 +26,16 @@ body, html {
 .keyboardButton{
     height: 29px;
     width: 29px;
-    
+    color: white;
+    background-color: grey;  
 }
 
-#kb2{
-    height: 38px;
-    width: 291px;
-    
+#kb1{
+    padding: 0 15px 0 15px;
 }
-
-#kb10, #kb110{
-    height: 29px;
-    width: 14px;
-    border-width: 0px;
-    background-color: white;
-}
-
 #kb20, #kb28{
     height: 29px;
     width: 43.5px;
-    
 }
 
 .row{
