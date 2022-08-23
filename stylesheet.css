@@ -18,14 +18,14 @@ body, html {
 }
 
 .simpleKeyboard{
-    margin: auto;
+    margin-left: auto;
     width: 80%;
     height: 13.5%;
     padding: 0 20% 0 28%;
 }
 
 .keyboardButton{
-    height: 0.3in;
+    height: 0.6in;
     width: 0.6in;
     color: white;
     background-color: grey;  
@@ -35,7 +35,7 @@ body, html {
     padding: 0 0.3in 0 0.3in;
 }
 #kb20, #kb28{
-    height: 0.3in;
+    height: 0.6in;
     width: 0.9in;
 }
 
