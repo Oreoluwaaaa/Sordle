@@ -19,23 +19,24 @@ body, html {
 
 .simpleKeyboard{
     margin: auto;
-    width: 291px;
-    height: 95px;
+    width: 80%;
+    height: 13.5%;
+    padding: 0 20% 0 28%;
 }
 
 .keyboardButton{
-    height: 29px;
-    width: 29px;
+    height: 0.3in;
+    width: 0.6in;
     color: white;
     background-color: grey;  
 }
 
 #kb1{
-    padding: 0 15px 0 15px;
+    padding: 0 0.3in 0 0.3in;
 }
 #kb20, #kb28{
-    height: 29px;
-    width: 43.5px;
+    height: 0.3in;
+    width: 0.9in;
 }
 
 .row{
