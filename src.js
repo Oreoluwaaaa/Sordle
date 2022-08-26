@@ -56,7 +56,7 @@ function checkInput(input, answer, row){
 
             let button = $(`.${input[j].toUpperCase()}`);
 
-            if(button.css("background") !== "green" && button.css("background") !== "orange" ){   
+            if(button.css("background") !== "green" || button.css("background") !== "orange" ){   
                 button.css("background", "black").css("transition", "all 5.0s ease");
             }
         }
