@@ -21,15 +21,19 @@ async function inDictionary(word){
 }
 
 function checkInput(input, answer, row){
-    correctInput = 0;
+    let correctInput = 0;
     answer = answer.split("");
     let changedIndices = new Set();
 
+    let green = "rgb(0, 128, 0)";
+    let orange = "rgb(255, 165, 0)";
+    let black = "rgb(0, 0, 0)";
+
     for(let j = 0; j < 7; j++){
         if(input[j] === answer[j]){
-            $(`div.row#${row} > div#${j}.cell`).css("background", "green").css("transition", "all 5.0s ease");
+            $(`div.row#${row} > div#${j}.cell`).css("background-color", green).css("transition", "all 5.0s ease");
 
-            $(`.${input[j].toUpperCase()}`).css("background", "green").css("transition", "all 5.0s ease");
+            $(`.${input[j].toUpperCase()}`).css("background-color", green).css("transition", "all 5.0s ease");
 
             answer[j] = "-";
             changedIndices.add(j);
@@ -38,12 +42,12 @@ function checkInput(input, answer, row){
     }
     for(let j = 0; j < 7; j++){    
         if(answer.includes(input[j]) && !(changedIndices.has(j))){
-            $(`div.row#${row} > div#${j}.cell`).css("background", "orange").css("transition", "all 5.0s ease");
+            $(`div.row#${row} > div#${j}.cell`).css("background-color", orange).css("transition", "all 5.0s ease");
 
             let button = $(`.${input[j].toUpperCase()}`);
 
-            if(button.css("background") !== "green"){
-                button.css("background", "orange").css("transition", "all 5.0s ease");
+            if(button.css("background-color") != green){
+                button.css("background-color", orange).css("transition", "all 5.0s ease");
             }
 
             changedIndices.add(j);
@@ -52,12 +56,12 @@ function checkInput(input, answer, row){
     }
     for(let j = 0; j < 7; j++){
         if(!(changedIndices.has(j))){
-            $(`div.row#${row} > div#${j}.cell`).css("background", "black").css("transition", "all 5.0s ease");
+            $(`div.row#${row} > div#${j}.cell`).css("background-color", black).css("transition", "all 5.0s ease");
 
             let button = $(`.${input[j].toUpperCase()}`);
-
-            if(button.css("background") !== "green" || button.css("background") !== "orange" ){   
-                button.css("background", "black").css("transition", "all 5.0s ease");
+            
+            if((button.css("background-color") != orange) && (button.css("background-color") != green )){   
+                button.css("background-color", black).css("transition", "all 5.0s ease");
             }
         }
     }
