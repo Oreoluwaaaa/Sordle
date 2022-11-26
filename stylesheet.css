@@ -34,7 +34,8 @@ body, html {
     height: 100%;
     width: 10%;
     color: white;
-    background-color: grey;  
+    background-color: grey;
+    font-size: 25px;  
 }
 
 #kb1{
@@ -62,14 +63,14 @@ body, html {
     text-align: center;
     vertical-align: middle;
     line-height: 100%;
-    font-size: 70px;
+    font-size: 100px;
     color: white;
 
 }
 
 /* None Mobile Devices */
 @media screen and (min-width: 1000px) {
-    .simple-keyboard{
+    .simpleKeyboard{
         display: none;
     }
     #table{
