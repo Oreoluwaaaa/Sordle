@@ -20,30 +20,30 @@ body, html {
 .simpleKeyboard{
     margin: auto;
     width: 80%;
-    height: 13.5%;
+    height: 15%;
     /* padding: 0 20% 0 28%; */
 }
 
 .keyboardRow{
-    height: 0.6in;
-    width: 6in;
+    height: 33%;
+    width: 100%;
     margin: auto;
 }
 
 .keyboardButton{
-    height: 0.6in;
-    width: 0.6in;
+    height: 100%;
+    width: 10%;
     color: white;
     background-color: grey;  
 }
 
 #kb1{
-    width: 5.4in;
+    /* width: 5.4in; */
     padding: 0 0.3in 0 0.3in;
 }
 #kb20, #kb28{
-    height: 0.6in;
-    width: 0.9in;
+    height: 100%;
+    width: 15%;
 }
 
 .row{
