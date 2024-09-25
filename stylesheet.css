@@ -1,106 +1,157 @@
 h1 {
     text-align: center;
+    color: white;
+    font-family: 'Comic Sans MS', cursive, sans-serif; 
+    font-size: 250%;
 }
 
 body, html {
     height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c;
+    overflow: hidden; 
 }
 
-#table{
+#table {
+    width: 50vw;                
+    max-width: 500px;          
+    max-height: 500px;
+    min-width: 150px;
+    min-height: 150px;
     margin: auto;
-    width: 80%;
-    height: 49%;
+    border-radius: 15px;
+    overflow: hidden;          
+    display: flex;
+    flex-direction: column;     
 }
 
-#space{
-    width: 49px;
-    height: 50px;
-}
-
-.simpleKeyboard{
+.simpleKeyboard {
+    width: 80vw;      
+    max-width: 800px;       
+    height: 30vh;              
     margin: auto;
-    width: 80%;
-    height: 15%;
-    /* padding: 0 20% 0 28%; */
+    display: flex;
+    flex-wrap: wrap; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.keyboardRow{
-    height: 33%;
-    width: 100%;
-    margin: auto;
+.simpleKeyboard > div {
+    margin: 2px 0; 
+    max-height: fit-content;
+    max-width: fit-content;
 }
 
-.keyboardButton{
+.kbRow {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0px;
+}
+
+.keyboardButton {
     height: 100%;
-    width: 10%;
+    width: 4vw;        
     color: white;
     background-color: grey;
-    font-size: 25px;  
+    font-size: 2vw;   
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-#kb1{
-    /* width: 5.4in; */
-    padding: 0 0.3in 0 0.3in;
-}
-#kb20, #kb28{
-    height: 100%;
-    width: 15%;
+.keyboardButton:hover {
+    background-color: #555;
 }
 
-.row{
-    background-color: grey;
+.row {
+    background-color: #2e2e2e;
     border: 0.01px solid black;
     width: 100%;
-    height: 13.9%;
-    display: flex; 
-}
-
-.cell{
-    background-color: grey;
-    border: 1px solid black;
-    width: 14.1%;
     height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 100%;
-    font-size: 100px;
+    display: flex;
+}
+
+
+.cell {
+    background-color: #2e2e2e;
+    width: calc(10% / 7); 
+    height: calc(100%); 
+    border: 1px solid black;
+    flex-grow: 1;            
+    flex-basis: 0;          
+    aspect-ratio: 1 / 1;     
+    font-size: 3vw;          
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5); 
+    transition: background-color 0.5s ease;
 
 }
 
-/* None Mobile Devices */
-@media screen and (min-width: 1000px) {
-    .simpleKeyboard{
-        display: none;
-    }
-    #table{
-        margin: auto;
-        width: 490px;
-        height: 490px;
-    }
-    
-    .row{
-        background-color: grey;
-        border: 0.01px solid black;
-        width: 100%;
-        height: 13.9%;
-        display: flex; 
-    }
-    
-    .cell{
-        background-color: grey;
-        border: 1px solid black;
-        width: 70px;
-        height: 100%;
-        text-align: center;
-        vertical-align: middle;
-        line-height: 100%;
-        font-size: 70px;
-        color: white;
-    
-    }
 
+.pop {
+    animation: pop 0.3s ease forwards; 
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0); 
+        opacity: 0;        
+    }
+    100% {
+        transform: scale(1); 
+        opacity: 1;       
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translate(0); }
+    25% { transform: translate(-5px); }
+    50% { transform: translate(5px); }
+    75% { transform: translate(-5px); }
+    100% { transform: translate(0); }
+}
+
+/*keyboard disappears when screen is bigger than this*/
+@media (min-width: 1521px) {
+    .simpleKeyboard {
+        display: none; 
+    }
+}
+
+
+/* adjustments for smaller screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 200%; 
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 150%; 
+    }
+}
+
+@media (max-width: 600px) {
+    #table {
+        height: 40vh;
+    }
     
-    
-    
+    .keyboardButton { 
+        width: 8vw;             
+        max-width: 60px;       
+        font-size: 2vw;         
+    }
 }
