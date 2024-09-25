@@ -122,9 +122,9 @@ $(document).ready(async function () {
                     row++;
                     input = "";
                     if (row === 7) {
+                        revealAnswer(answer); // reveal the answer
                         setTimeout(() => {
                             alert(`You're out of tries.`);
-                            revealAnswer(answer); // reveal the answer
                         }, 1750);
                     }
                 }
